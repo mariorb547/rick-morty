@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
@@ -17,17 +17,24 @@ import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Divider } from "@material-ui/core";
+import TreeView from "@material-ui/lab/TreeView";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import TreeItem from "@material-ui/lab/TreeItem";
+
 import moment from "moment";
 import { connect } from "react-redux";
-import * as capituloActions from "../../actions/capituloActions";
+
 import { render } from "@testing-library/react";
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: "25%",
-    height: 500,
+    height: 510,
     display: "inline-block",
-    margin: "10px"
+    margin: "10px",
+    ...theme.typography.button,
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(1)
   },
   media: {
     height: 0,
@@ -43,28 +50,38 @@ const useStyles = makeStyles(theme => ({
   expandOpen: {
     transform: "rotate(180deg)"
   },
-  avatar: {
-    backgroundColor: red[500]
-  },
+  avatar: {},
   letra: {
     backgroundColor: red[500]
+  },
+  backgroundColor: {
+    backgroundColor: "#e0e0e0",
+    borderRadius: "27px 27px 27px 27px"
+  },
+  TextLeft: {
+    textAlign: "left",
+    backgroundColor: "#e8f5e9",
+    borderRadius: "5px 5px 5px 5px"
+  },
+  typography: {
+    fontFamily: ["Roboto"]
+  },
+  menu: {
+    height: 240,
+    flexGrow: 1,
+    maxWidth: 400
   }
 }));
 
- 
-
-const Capitulo= ({ personaje })=> {
-  
-  
+const Capitulo = ({ personaje }) => {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded, anchorEl, setAnchorEl] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
-  }
-  
+  };
+
   return (
-    
     <Card className={classes.root}>
       <CardHeader
         avatar={
@@ -77,21 +94,27 @@ const Capitulo= ({ personaje })=> {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <Fragment>
+            <Link to={`/capitulos/${personaje.id}`}>
+              <IconButton aria-label="settings">
+                <MoreVertIcon />
+              </IconButton>
+            </Link>
+          </Fragment>
         }
         title={personaje.name}
-        subheader={moment(personaje.created).format('lll') }
+        subheader={moment(personaje.created).format("lll")}
       />
       <CardMedia
+        alt="Contemplative Reptile"
+        title="Contemplative Reptile"
         className={classes.media}
         image={personaje.image}
         title="Paella dish"
       />
       <CardContent>
-        <div >
-          STATUS: {personaje.status}
+        <div className={(classes.backgroundColor, classes.TextLeft)}>
+          <span className={classes.fontFamily}>STATUS: {personaje.status}</span>
           <Divider />
           SPECIES:{personaje.species}
           <Divider />
@@ -101,13 +124,6 @@ const Capitulo= ({ personaje })=> {
           <Divider />
           LOCATION:{personaje.location["name"]}
           <Divider />
-          <div>
-            <Link to={`/capitulos/${personaje.id}`}>
-              ir a
-            </Link>
-          </div>
-          
-         
         </div>
       </CardContent>
       <CardActions disableSpacing>
@@ -128,29 +144,8 @@ const Capitulo= ({ personaje })=> {
           <ExpandMoreIcon />
         </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-            set aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-            over medium-high heat. Add chicken, shrimp and chorizo, and cook,
-            stirring occasionally until lightly browned, 6 to 8 minutes.
-            Transfer shrimp to a large plate and set aside, leaving chicken and
-            chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes,
-            onion, salt and pepper, and cook, stirring often until thickened and
-            fragrant, about 10 minutes. Add saffron broth and remaining 4 1/2
-            cups chicken broth; bring to a boil.
-          </Typography>
-          
-        </CardContent>
-      </Collapse>
     </Card>
-  )
-  
-}
+  );
+};
 
 export default Capitulo;

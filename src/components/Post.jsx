@@ -7,6 +7,7 @@ import * as personajesActions from "../../actions/personajesActions";
 import Progress from "../Progress";
 import axios from "axios";
 import { textAlign } from "@material-ui/system";
+import Pagination from "./Pagination";
 class Capitulos extends Component {
   
   async componentDidMount() {
@@ -56,6 +57,7 @@ class Capitulos extends Component {
         </div>
         <h1>CAPITULOS</h1>
         {this.addContenido()}
+        
       </div>
     );
   }

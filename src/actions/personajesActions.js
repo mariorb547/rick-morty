@@ -27,19 +27,19 @@ export const traerTodosPersonajes = () => async dispatch => {
   }
 };
 
-export const traerPersonaje = () => async dispatch => {
+export const traerPersonaje = (key) => async dispatch => {
   dispatch({
     type: CARGANDO_PERSONAJES
   });
 
   try {
     const respuesta = await axios.get(
-      "https://rickandmortyapi.com/api/character/1"
+      `https://rickandmortyapi.com/api/character/${key}`
     );
 
     dispatch({
       type: TRAER_PERSONAJE,
-      payload: respuesta
+      payload: respuesta.data
     });
   } catch (error) {
     dispatch({
