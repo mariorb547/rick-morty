@@ -116,7 +116,7 @@ export default function PersistentDrawerLeft(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            RICK Y MORTY
           </Typography>
         </Toolbar>
       </AppBar>
