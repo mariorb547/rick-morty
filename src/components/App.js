@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Layout from "./Layout";
 import NotFound from "./NotFound";
@@ -12,10 +12,11 @@ const App = () => (
         <Route exact path="/" component={Personajes} />
         <Route exact path="/personaje/:id" component={Personajes} />
         <Route path="/capitulos/:id" exact component={Capitulos} />
-        <Route path="/capitulos" exact component={Capitulos}/>
+        <Route path="/capitulos" exact component={Capitulos} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
-</BrowserRouter>);
+  </BrowserRouter>
+);
 
 export default App;

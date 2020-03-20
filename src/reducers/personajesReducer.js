@@ -1,10 +1,15 @@
-import { TRAER_TODOS_PERSONAJES, TRAER_PERSONAJE,CARGANDO_PERSONAJES ,ERROR_PERSONAJES} from "../types/personajeTypes";
+import {
+  TRAER_TODOS_PERSONAJES,
+  TRAER_PERSONAJE,
+  CARGANDO_PERSONAJES,
+  ERROR_PERSONAJES
+} from "../types/personajeTypes";
 
 const INITIAL_STATE = {
   personajes: [],
-  personaje:'',
+  personaje: "",
   cargando: false,
-  error: ''
+  error: ""
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -14,19 +19,23 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         personajes: action.payload,
         cargando: false,
-        error:''
+        error: ""
       };
-      case TRAER_PERSONAJE:
+    case TRAER_PERSONAJE:
       return {
         ...state,
         personaje: action.payload,
         cargando: false,
-        error:''
+        error: ""
       };
     case CARGANDO_PERSONAJES:
       return { ...state, cargando: true };
     case ERROR_PERSONAJES:
-      return { ...state,error: "PERSONAJE NO DISPONIBLES INTERTAR MÁS TARDE" ,cargando:false};
+      return {
+        ...state,
+        error: "PERSONAJE NO DISPONIBLES INTERTAR MÁS TARDE",
+        cargando: false
+      };
 
     default:
       return state;
