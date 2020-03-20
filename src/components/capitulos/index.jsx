@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Search from "../Search";
 import Capitulo from "./Capitulo";
 import * as capitulosActions from "../../actions/capitulosActions";
 import * as personajesActions from "../../actions/personajesActions";
 import Progress from "../Progress";
 import TextField from '@material-ui/core/TextField';
 import AccountCircle from "@material-ui/icons/Search";
-
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 class Capitulos extends Component {
@@ -73,9 +73,13 @@ class Capitulos extends Component {
         }}
       />
         <h1>CAPITULOS</h1>
+        <Container maxWidth="md">
+          <Grid container spacing={4}>
         {filteredCountries.map(capitulo => {
           return <Capitulo key={capitulo.id} capitulo={capitulo} />;
         })}
+        </Grid>
+        </Container>
       </div>
     );
   }

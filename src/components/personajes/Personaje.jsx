@@ -1,180 +1,98 @@
-import React, { Fragment, Component } from "react";
-import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
+import React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
+import CameraIcon from "@material-ui/icons/PhotoCamera";
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { Link } from "react-router-dom";
 import { Divider } from "@material-ui/core";
-import TreeView from "@material-ui/lab/TreeView";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import TreeItem from "@material-ui/lab/TreeItem";
-
 import moment from "moment";
-import { connect } from "react-redux";
-
-import { render } from "@testing-library/react";
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: "25%",
-    height: 510,
-    display: "inline-block",
-    margin: "10px",
-    ...theme.typography.button,
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(1)
+  icon: {
+    marginRight: theme.spacing(2)
   },
-  media: {
-    height: 0,
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6)
+  },
+  heroButtons: {
+    marginTop: theme.spacing(4)
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8)
+  },
+  card: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column"
+  },
+  cardMedia: {
     paddingTop: "56.25%" // 16:9
   },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
+  cardContent: {
+    flexGrow: 1
   },
-  expandOpen: {
-    transform: "rotate(180deg)"
-  },
-  avatar: {},
-  letra: {
-    backgroundColor: red[500]
-  },
-  backgroundColor: {
-    backgroundColor: "#585858",
-  
-  },
-  TextLeft: {
-    textAlign: "left",
-    //backgroundColor: "#585858",
-    //borderRadius: "5px 5px 5px 5px"
-  },
-  typography: {
-    fontFamily: ["Roboto"]
-  },
-  menu: {
-    height: 240,
-    flexGrow: 1,
-    maxWidth: 400
-  },palette: {
-    common: { "black": "#000", "white": "#fff" },
-    background: { "paper": "#fff", "default": "#fafafa" },
-    primary: {
-      light: "#7986cb",
-      main: "#3f51b5",
-      dark: "#303f9f",
-      contrastText: "#fff"
-    },
-    secondary: {
-      light: "#ff4081",
-      main: "#f50057",
-      dark: "#c51162",
-      contrastText: "#fff"
-    },
-    error: {
-      light: "#e57373",
-      main: "#f44336",
-      dark: "#d32f2f",
-      contrastText: "#fff"
-    },
-    text: {
-      primary: "rgba(0, 0, 0, 0.87)",
-      secondary: "rgba(0, 0, 0, 0.54)",
-      disabled: "rgba(0, 0, 0, 0.38)",
-      hint: "rgba(0, 0, 0, 0.38)"
-    }
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6)
   }
-
 }));
 
-const Capitulo = ({ personaje }) => {
+export default function Personaje({ personaje }) {
   const classes = useStyles();
-  const [expanded, setExpanded, anchorEl, setAnchorEl] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            <img
-              width="75px"
-              src="https://i.blogs.es/fde0b7/rick-y-morty-temporada-4-diciembre-22-netflix-mexico/1366_2000.jpg"
-              alt="img rickandmorty"
-            />
-          </Avatar>
-        }
-        action={
-          <Fragment>
-            <Link to={`/capitulos/${personaje.id}`}>
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            </Link>
-          </Fragment>
-        }
-        title={personaje.name}
-        subheader={moment(personaje.created).format("lll")}
-      />
-      <CardMedia
-        alt="Contemplative Reptile"
-        title="Contemplative Reptile"
-        className={classes.media}
-        image={personaje.image}
-        title="Paella dish"
-      />
-      <CardContent>
-        <div className={(classes.backgroundColor, classes.TextLeft)}>
-          <span className={classes.fontFamily}>STATUS: {personaje.status}</span>
-          <Divider />
-          SPECIES:{personaje.species}
-          <Divider />
-          GENDER:{personaje.gender}
-          <Divider />
-          ORIGIN:{personaje.origin["name"]}
-          <Divider />
-          LOCATION:{personaje.location["name"]}
-          <Divider />
-        </div>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <Link to={`/capitulos/${personaje.id}`}>Ir a Capitulos</Link>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
+    <React.Fragment>
+      <Grid item key={personaje.id} xs={12} sm={6} md={4}>
+        <Card className={classes.card}>
+          <CardMedia
+            className={classes.cardMedia}
+            image={personaje.image}
+            title="Image title"
+          />
+          <CardContent className={classes.cardContent}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {personaje.name}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="h2">
+               {moment(personaje.created).format("lll")}
+            </Typography>
+            <Typography>  STATUS: {personaje.status}</Typography>
+            <Typography>   SPECIES:{personaje.species}</Typography>
+            <Typography>   GENDER:{personaje.gender}</Typography>
+            <Typography>  ORIGIN:{personaje.origin["name"]}</Typography>
+            <Typography> LOCATION:{personaje.location["name"]}</Typography>
+          </CardContent>
+          <CardActions>
+             
+            <Button size="small" color="primary">
+               <Link to={`/capitulos/${personaje.id}`}>Ir a capitulos</Link>
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
+    </React.Fragment>
   );
-};
-
-export default Capitulo;
+}

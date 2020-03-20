@@ -1,12 +1,12 @@
 import React, { Component, useState, useEffect } from "react";
 import { connect } from "react-redux";
-import Search from "../Search";
 import Personaje from "./Personaje";
 import * as capitulosActions from "../../actions/capitulosActions";
 import * as personajesActions from "../../actions/personajesActions";
 import Progress from "../Progress";
 import AccountCircle from "@material-ui/icons/Search";
-
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 import TextField from "@material-ui/core/TextField";
@@ -58,7 +58,6 @@ class Personajes extends Component {
     const { search } = this.state;
     var personajesAux = [];
     if (this.props.match.params.id) {
-     
       this.props.personajesReducer.personajes.map(personajes => {
         var result = personajes["episode"].filter(
           personaje => personaje == this.props.capitulosReducer.capitulo["url"]
@@ -66,19 +65,14 @@ class Personajes extends Component {
         if (result != "") {
           personajesAux.push(personajes);
         }
-      }); 
+      });
     } else {
-      personajesAux=this.props.personajesReducer.personajes;
-      
+      personajesAux = this.props.personajesReducer.personajes;
     }
 
-
-
-    const filteredCountries = personajesAux.filter(
-      country => {
-        return country.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
-      }
-    );
+    const filteredCountries = personajesAux.filter(country => {
+      return country.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    });
 
     return (
       <div>
@@ -97,9 +91,13 @@ class Personajes extends Component {
         />
 
         <h1>PERSONAJES</h1>
-        {filteredCountries.map(personaje => {
-          return <Personaje key={personaje.id} personaje={personaje} />;
-        })}
+        <Container maxWidth="md">
+          <Grid container spacing={4}>
+            {filteredCountries.map(personaje => {
+              return <Personaje key={personaje.id} personaje={personaje} />;
+            })}
+          </Grid>
+        </Container>
       </div>
     );
   }
