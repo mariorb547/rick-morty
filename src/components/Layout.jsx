@@ -116,7 +116,7 @@ export default function PersistentDrawerLeft(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            RICK Y MORTY
+            RICK AND MORTY
           </Typography>
         </Toolbar>
       </AppBar>
