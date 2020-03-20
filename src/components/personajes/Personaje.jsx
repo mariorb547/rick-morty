@@ -55,13 +55,13 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: red[500]
   },
   backgroundColor: {
-    backgroundColor: "#e0e0e0",
-    borderRadius: "27px 27px 27px 27px"
+    backgroundColor: "#585858",
+  
   },
   TextLeft: {
     textAlign: "left",
-    backgroundColor: "#e8f5e9",
-    borderRadius: "5px 5px 5px 5px"
+    //backgroundColor: "#585858",
+    //borderRadius: "5px 5px 5px 5px"
   },
   typography: {
     fontFamily: ["Roboto"]
@@ -70,7 +70,35 @@ const useStyles = makeStyles(theme => ({
     height: 240,
     flexGrow: 1,
     maxWidth: 400
+  },palette: {
+    common: { "black": "#000", "white": "#fff" },
+    background: { "paper": "#fff", "default": "#fafafa" },
+    primary: {
+      light: "#7986cb",
+      main: "#3f51b5",
+      dark: "#303f9f",
+      contrastText: "#fff"
+    },
+    secondary: {
+      light: "#ff4081",
+      main: "#f50057",
+      dark: "#c51162",
+      contrastText: "#fff"
+    },
+    error: {
+      light: "#e57373",
+      main: "#f44336",
+      dark: "#d32f2f",
+      contrastText: "#fff"
+    },
+    text: {
+      primary: "rgba(0, 0, 0, 0.87)",
+      secondary: "rgba(0, 0, 0, 0.54)",
+      disabled: "rgba(0, 0, 0, 0.38)",
+      hint: "rgba(0, 0, 0, 0.38)"
+    }
   }
+
 }));
 
 const Capitulo = ({ personaje }) => {
@@ -133,6 +161,7 @@ const Capitulo = ({ personaje }) => {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
+        <Link to={`/capitulos/${personaje.id}`}>Ir a Capitulos</Link>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded

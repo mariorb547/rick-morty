@@ -5,10 +5,16 @@ import Capitulo from "./Capitulo";
 import * as capitulosActions from "../../actions/capitulosActions";
 import * as personajesActions from "../../actions/personajesActions";
 import Progress from "../Progress";
-import axios from "axios";
-import { textAlign } from "@material-ui/system";
+import TextField from '@material-ui/core/TextField';
+import AccountCircle from "@material-ui/icons/Search";
+
+import InputAdornment from "@material-ui/core/InputAdornment";
+
 class Capitulos extends Component {
-  
+  state = {
+    search: ""
+  };
+
   async componentDidMount() {
     if (this.props.match.params.id) {
       if (!this.props.personajesReducer.personaje.leght) {
@@ -20,11 +26,15 @@ class Capitulos extends Component {
 
   componentWillUpdate() {}
 
-  addContenido = () => {
-    if (this.props.cargando) {
-      return <Progress />;
-    }
+  
+  onchange = e => {
+    this.setState({ search: e });
+  };
 
+
+  render() {
+    const { search } = this.state;
+    var capitulos=[];
     if (this.props.match.params.id) {
       var capitlosAux = [];
       this.props.capitulosReducer.capitulos.map(characters => {
@@ -36,26 +46,36 @@ class Capitulos extends Component {
           capitlosAux.push(characters);
         }
       });
-
-      return capitlosAux.map(capitulo => (
-        <Capitulo key={capitulo.id} capitulo={capitulo} />
-      ));
+      capitulos=capitlosAux;
+     
     } else {
-      return this.props.capitulosReducer.capitulos.map(capitulo => (
-        <Capitulo key={capitulo.id} capitulo={capitulo} />
-      ));
+      capitulos=this.props.capitulosReducer.capitulos;
+      
     }
-  };
-
-  render() {
-    console.log(this.props);
+    const filteredCountries =capitulos.filter(
+      country => {
+        return country.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+      }
+    );
     return (
       <div>
-        <div  >
-        <Search />
-        </div>
+        <TextField
+         id="input-with-icon-textfield"
+        label=""
+        placeholder="Buscar..."
+        onChange={e => this.onchange(e.target.value)}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <AccountCircle />
+            </InputAdornment>
+          ),
+        }}
+      />
         <h1>CAPITULOS</h1>
-        {this.addContenido()}
+        {filteredCountries.map(capitulo => {
+          return <Capitulo key={capitulo.id} capitulo={capitulo} />;
+        })}
       </div>
     );
   }

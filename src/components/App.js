@@ -11,9 +11,10 @@ const App = () => (
     <Layout>
       <Switch>
         <Route exact path="/" component={Personajes} />
-        <Route exact path="/:id" component={Personajes} />
+        <Route exact path="/personajes/:id" component={Personajes} />
         <Route path="/capitulos/:id" exact component={Capitulos} />
-        <Route path="/pruebas" exact component={Prueba}/>
+         <Route path="/capitulos" exact component={Capitulos} />
+        
         <Route component={NotFound} />
       </Switch>
     </Layout>

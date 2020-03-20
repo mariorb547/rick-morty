@@ -64,7 +64,7 @@ export default function Capitulo({capitulo}) {
           </Avatar>
         }
         action={
-          <Link to={`/${capitulo.id}`}>
+          <Link to={`/personajes/${capitulo.id}`}>
             <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
@@ -85,6 +85,9 @@ export default function Capitulo({capitulo}) {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
+        <Link to={`/personajes/${capitulo.id}`}>
+            Ir a Personajes
+          </Link>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
